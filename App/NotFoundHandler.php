@@ -9,7 +9,7 @@ use Slim\Http\Response;
 
 class NotFoundHandler
 {
-    function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(Request $request, Response $response): ResponseInterface
     {
         /** @var ResponsePayload $responsePayload */
         $responsePayload = $request->getAttribute('ResponsePayload');

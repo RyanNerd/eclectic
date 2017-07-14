@@ -23,8 +23,8 @@ class App extends Slender
         // Map groups to controllers
         $groups = $container->get('groups') ?? [];
         foreach ($groups as $groupPath => $controllers) {
-            $this->group($groupPath, function() use ($container, $controllers) {
-                foreach($controllers as $controller) {
+            $this->group($groupPath, function () use ($container, $controllers) {
+                foreach ($controllers as $controller) {
                     $container->get($controller)($this);
                 }
             });
@@ -34,7 +34,7 @@ class App extends Slender
         $routes = $container->get('routes') ?? [];
         foreach ($routes as $method => $routing) {
             if (in_array($method, self::ALLOWED_METHODS)) {
-                foreach($routing as $path => $action) {
+                foreach ($routing as $path => $action) {
                     $this->$method($path, $action);
                 }
             }
@@ -43,8 +43,7 @@ class App extends Slender
         // Middleware mapping
         $mw = $container->get('mw') ?? [];
         ksort($mw);
-        foreach ($mw as $priority => $class)
-        {
+        foreach ($mw as $priority => $class) {
             $this->add($class);
         }
 

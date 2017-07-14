@@ -15,14 +15,14 @@ class Initializer
     protected $responsePayload;
     protected $JSON;
 
-    function __construct(RequestPayload $requestPayload, ResponsePayload $responsePayload, JSON $JSON)
+    public function __construct(RequestPayload $requestPayload, ResponsePayload $responsePayload, JSON $JSON)
     {
         $this->requestPayload = $requestPayload;
         $this->responsePayload = $responsePayload;
         $this->JSON = $JSON;
     }
 
-    function __invoke(Request $request, Response $response, callable $next): ResponseInterface
+    public function __invoke(Request $request, Response $response, callable $next): ResponseInterface
     {
         $responsePayload = $this->responsePayload;
 
@@ -56,4 +56,3 @@ class Initializer
             withAttribute('ResponsePayload', $this->responsePayload), $response);
     }
 }
-

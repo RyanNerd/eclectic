@@ -9,7 +9,7 @@ use Slim\Http\Response;
 
 class NotAllowedHandler
 {
-    function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(Request $request, Response $response): ResponseInterface
     {
         /** @var ResponsePayload $responsePayload */
         $responsePayload = $request->getAttribute('ResponsePayload');
@@ -18,5 +18,3 @@ class NotAllowedHandler
         return $response->withJson($responsePayload->build($request->getMethod() . ' Not Allowed'), 404);
     }
 }
-
-

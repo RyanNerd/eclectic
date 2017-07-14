@@ -53,4 +53,3 @@ class RequestPayload implements \ArrayAccess, \Countable
         return count($this->data);
     }
 }
-
