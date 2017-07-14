@@ -1,0 +1,23 @@
+{
+	"repositories":
+	[
+		{
+			"type": "git",
+			"url": "git@github.com:RyanNerd/Slender.git"
+		}
+	],
+	"require": {
+		"RyanNerd/slender": "^1.0.0",
+		"vlucas/phpdotenv": "^2.4",
+		"respect/validation": "^1.1",
+		"kherge/json": "^2.0"
+	},
+	"autoload":
+	{
+		"psr-4":
+		{
+			"eclectic\\App\\": "App",
+			"eclectic\\": "App"
+        }
+    }
+}
