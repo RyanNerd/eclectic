@@ -3,12 +3,11 @@
 namespace eclectic\App;
 
 use DI\ContainerBuilder;
-use Slim\App as Slender;
+use Slender\App as Slender;
 
 class App extends Slender
 {
     protected const ALLOWED_METHODS = ['get', 'post', 'put', 'delete', 'head', 'patch', 'options'];
-
     /**
      * App constructor.
      * Establish DI
@@ -32,8 +31,10 @@ class App extends Slender
 
         // Map individual routes to Actions
         $routes = $container->get('routes') ?? [];
+        $allowedMethods = $container->has('allowedMethods') ?
+            $container->get('allowedMethods') : self::ALLOWED_METHODS;
         foreach ($routes as $method => $routing) {
-            if (in_array($method, self::ALLOWED_METHODS)) {
+            if (in_array($method, $allowedMethods)) {
                 foreach ($routing as $path => $action) {
                     $this->$method($path, $action);
                 }
@@ -56,7 +57,7 @@ class App extends Slender
      */
     protected function configureContainer(ContainerBuilder $builder)
     {
-        foreach (glob(__DIR__ . '/../config/*.php') as $definitions) {
+        foreach (glob(__DIR__ . '/../config/*.php', GLOB_NOSORT) as $definitions) {
             $builder->addDefinitions(realpath($definitions));
         }
     }
